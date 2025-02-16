@@ -27,7 +27,7 @@ To run the script, execute the following command in the terminal:
 bash eval_mor.sh
 ```
 
-This script will automatically process predefined datasets and scorers.
+This script will automatically process predefined datasets.
 
 
 ---
