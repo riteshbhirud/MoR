@@ -1,7 +1,5 @@
 # MoR
 
-# Project Title
-
 ## Installation
 To install the required environment, use the `mor_env.yml` file:
 
