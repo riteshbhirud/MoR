@@ -1,5 +1,4 @@
 # MoR
-# Project Title
 
 ## Installation
 To install all required dependencies, first create a virtual environment (optional but recommended) and install the necessary packages from `requirements.txt`:
