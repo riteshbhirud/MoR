@@ -1,7 +1,16 @@
 # MoR
 
+# Project Title
+
 ## Installation
-To install all required dependencies, first create a virtual environment (optional but recommended) and install the necessary packages from `requirements.txt`:
+To install the required environment, use the `mor_env.yml` file:
+
+```bash
+conda env create -f mor_env.yml
+conda activate your_env_name  # Replace with the actual environment name
+```
+
+Alternatively, you can install dependencies using `requirements.txt`. First, create a virtual environment (optional but recommended) and install the necessary packages:
 
 ```bash
 python -m venv venv  # Create a virtual environment
