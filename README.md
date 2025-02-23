@@ -16,12 +16,26 @@ conda activate your_env_name  # Replace with actual environment name
 pip install -r requirements.txt
 ```
 
-## Usage
-To run the script, execute the following command in the terminal:
+## Inference
+To run the inference script, execute the following command in the terminal:
 
 ```bash
 bash eval_mor.sh
 ```
 
-This script will automatically process predefined datasets and scorers.
+This script will automatically process three datasets using the pre-trained planning graph generator and the pre-trained reranker.
+
+## Training
+### Training the planning graph generator 
+
+```bash
+bash train_planner.sh
+```
+
+### Training the reranker
+
+```bash
+bash train_reranker.sh
+```
+
 
