@@ -26,13 +26,19 @@ bash eval_mor.sh
 This script will automatically process three datasets using the pre-trained planning graph generator and the pre-trained reranker.
 
 ## Training
-### Training the planning graph generator 
+### Step1: Training the planning graph generator 
 
 ```bash
 bash train_planner.sh
 ```
 
-### Training the reranker
+### Step2: Train mixed traversal to collect candidates (note: there is no training process for reasoning)
+
+```bash
+bash run_reasoning.sh
+```
+
+### Step3: Training the reranker
 
 ```bash
 bash train_reranker.sh
