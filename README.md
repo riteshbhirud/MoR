@@ -44,4 +44,25 @@ bash run_reasoning.sh
 bash train_reranker.sh
 ```
 
+## Generating training data of Planner
+### We provide codes to generate your own training data to finetune the Planner by using different LLMs.
+#### If you are suing Azure API
 
+```bash
+python script.py --model "model_name" \
+  --dataset_name "dataset_name" \
+  --azure_api_key "your_azure_key" \
+  --azure_endpoint "your_azure_endpoint" \
+  --azure_api_version "your_azure_version"
+
+```
+
+#### If you are suing OpenAI API
+
+```bash
+python script.py --model "model_name" \
+  --dataset_name "dataset_name" \
+  --openai_api_key "your_openai_key" \
+  --openai_endpoint "your_openai_endpoint"
+
+```
