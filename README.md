@@ -16,6 +16,12 @@ conda activate your_env_name  # Replace with actual environment name
 pip install -r requirements.txt
 ```
 
+### Checkpoints download
+Before running the inference, please go to https://drive.google.com/drive/folders/1ldOYiyrIaZ3AVAKAmNeP0ZWfD3DLZu9D?usp=drive_link
+(1) download the checkpoints and put them under the directory MoR/Planning/data/
+(2) download the data and put them under the directory MoR/Reasoning/
+
+
 ## Inference
 To run the inference script, execute the following command in the terminal:
 
