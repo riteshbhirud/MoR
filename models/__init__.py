@@ -49,10 +49,5 @@ def get_model(args, skb, **kwargs):
                            max_k=args.llm_topk,
                            device=args.device
                            )
-    if model_name == 'Ours':
-        return GT(
-            skb,
-            query_emb_dir=args.query_emb_dir,
-            candidates_emb_dir=args.node_emb_dir,
-        )
+
     raise NotImplementedError(f'{model_name} not implemented')
