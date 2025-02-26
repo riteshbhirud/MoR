@@ -1,0 +1,55 @@
+[
+    {
+        "query": "Is the lens-specific intermediate filament-like protein, filensin, which is encoded by a gene expressed in the lens of camera-type eyes but not found in nasal cavity epithelial cells, involved in providing structural support to the ocular lens?",
+        "answer": {
+            "Triplets": [
+                [
+                    "anatomy",
+                    "expression present",
+                    "gene/protein"
+                ],
+                [
+                    "anatomy",
+                    "expression absent",
+                    "gene/protein"
+                ]
+            ],
+            "Restriction": {
+                "anatomy": [
+                    "lens of camera-type eyes",
+                    "nasal cavity epithelial cells"
+                ],
+                "gene/protein": [
+                    "filensin"
+                ],
+                "cellular_component": [
+                    "ocular lens"
+                ]
+            },
+            "Target": "gene/protein"
+        }
+    },
+    {
+        "query": "Which anatomical structures lack the expression of genes or proteins involved in the interaction with the fucose metabolism pathway?",
+        "answer": {
+            "Triplets": [
+                [
+                    "anatomy",
+                    "expression absent",
+                    "gene/protein"
+                ],
+                [
+                    "gene/protein",
+                    "interacts with",
+                    "pathway"
+                ]
+            ],
+            "Restriction": {
+                "pathway": [
+                    "fucose metabolism"
+                ]
+            },
+            "Target": "anatomy"
+        }
+    }
+]
