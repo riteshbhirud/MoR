@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ### Checkpoints and embeddings download
 Before running the inference, please go to https://drive.google.com/drive/folders/1ldOYiyrIaZ3AVAKAmNeP0ZWfD3DLZu9D?usp=drive_link
 
-(1) download the checkpoints and put them under the directory MoR/Planning/data/
+(1) download the checkpoints and put them under the directory MoR/Planning/
 
 (2) download the data and put them under the directory MoR/Reasoning/
 
