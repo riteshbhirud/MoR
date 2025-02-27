@@ -33,7 +33,7 @@ bash eval_mor.sh
 
 This script will automatically process three datasets using the pre-trained planning graph generator and the pre-trained reranker.
 
-## Training
+## Training (Train MoR from Scratch)
 ### Step1: Training the planning graph generator 
 
 ```bash
@@ -54,7 +54,7 @@ bash train_reranker.sh
 
 ## Generating training data of Planner
 ### We provide codes to generate your own training data to finetune the Planner by using different LLMs.
-#### If you are suing Azure API
+#### If you are using Azure API
 
 ```bash
 python script.py --model "model_name" \
@@ -65,7 +65,7 @@ python script.py --model "model_name" \
 
 ```
 
-#### If you are suing OpenAI API
+#### If you are using OpenAI API
 
 ```bash
 python script.py --model "model_name" \
