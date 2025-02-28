@@ -1,5 +1,10 @@
 import sys
-sys.path.append(f"/home/yongjia/dgl/Yongjia/MOE_20250222/")
+from pathlib import Path
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[1]
+# Add the project root to the system path
+sys.path.append(str(project_root))
 
 import random
 import torch
@@ -79,3 +84,7 @@ def move_to_cuda(sample):
             return maybe_tensor
 
     return _move_to_cuda(sample)
+
+
+if __name__ == "__main__":
+    print("Testing Utils")

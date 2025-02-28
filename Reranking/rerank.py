@@ -1,7 +1,9 @@
 import sys
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
-
+import os
+sys.path.append(os.path.dirname(os.path.abspath(os.getcwd())))
 from stark_qa import load_skb
+
+
 from torch.utils.data import Dataset, DataLoader
 import torch
 from tqdm import tqdm
@@ -298,7 +300,7 @@ def parse_args():
     parser.add_argument("--concat_num", type=int, default=0, help="Number of concatenation of embeddings.")
     
     # checkpoint save path
-    parser.add_argument("--checkpoint_path", type=str, default="/home/yongjia/dgl/Yongjia/MOE_20250222/Reranking/data/checkpoints", help="Path saves the checkpoints.")
+    parser.add_argument("--checkpoint_path", type=str, default="./data/checkpoints", help="Path saves the checkpoints.")
     
     # similarity vector dim
     parser.add_argument("--vector_dim", type=int, default=4, help="Dimension of the similarity vector.")
@@ -365,7 +367,7 @@ if __name__ == "__main__":
     args.concat_num = concat_num
     dataset_name = args.dataset_name
     
-    test_data_path = f"/home/yongjia/dgl/Yongjia/MOE_20250222/{dataset_name}_test.pkl"
+    test_data_path = f"../{dataset_name}_test.pkl"
     with open(test_data_path, 'rb') as f:
         test_data = pkl.load(f)
     skb = load_skb(dataset_name)

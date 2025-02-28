@@ -1,5 +1,6 @@
 import sys
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
+import os
+sys.path.append(os.path.dirname(os.path.abspath(os.getcwd())))
 
 import pickle as pkl
 from torch.utils.data import Dataset, DataLoader
@@ -12,7 +13,7 @@ import torch.nn as nn
 from torch.nn import CrossEntropyLoss
 import random
 from collections import defaultdict
-import os
+
 
 from Reranking.utils import move_to_cuda, seed_everything
 from Reranking.rerankers.path import PathReranker
@@ -481,7 +482,7 @@ def main(train_data, val_data, test_data, skb, dataset_name, args):
 
     # ***** Model *****
     reranker = PathReranker(socre_vector_input_dim=args.vector_dim, text_emb_input_dim=768, symb_enc_dim=3, args=args)
-    save_dir = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Reranking/data/checkpoints/{dataset_name}/path"
+    save_dir = f"./data/checkpoints/{dataset_name}/path"
     os.makedirs(save_dir, exist_ok=True)
 
     reranker.to(device)
@@ -594,7 +595,7 @@ def main(train_data, val_data, test_data, skb, dataset_name, args):
     )
     # save the results to json
     timestamp = time.strftime("%Y%m%d-%H%M%S")
-    output_dir = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Reranking/data/outputs/{dataset_name}"
+    output_dir = f"./data/outputs/{dataset_name}"
     os.makedirs(output_dir, exist_ok=True)
     with open(f"{output_dir}/results_{timestamp}.json", "w") as f:
         json.dump(results, f, indent=4)
@@ -634,9 +635,9 @@ def parse_args():
     # Add arguments for the dataset
     parser.add_argument("--dataset_name", type=str, default="prime", help="Name of the dataset to use.")
     # paths
-    parser.add_argument("--train_path", type=str, default=f"/home/yongjia/dgl/Yongjia/MOE_20250222/prime_train.pkl", help="Path to the training data.")
-    parser.add_argument("--test_path", type=str, default=f"/home/yongjia/dgl/Yongjia/MOE_20250222/prime_test.pkl", help="Path to the test data.")
-    parser.add_argument("--val_path", type=str, default=f"/home/yongjia/dgl/Yongjia/MOE_20250222/prime_val.pkl", help="Path to the validation data.")
+    parser.add_argument("--train_path", type=str, default=f"../prime_train.pkl", help="Path to the training data.")
+    parser.add_argument("--test_path", type=str, default=f"../prime_test.pkl", help="Path to the test data.")
+    parser.add_argument("--val_path", type=str, default=f"../prime_val.pkl", help="Path to the validation data.")
     
     # add concat_num
     parser.add_argument("--concat_num", type=int, default=0, help="Number of concatenation of embeddings.")
