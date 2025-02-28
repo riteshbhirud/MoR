@@ -2,8 +2,6 @@ import argparse
 import sys
 
 
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
-
 from Reasoning.mor4path import MOR4Path
 from Planning.model import Planner
 from prepare_rerank import prepare_trajectories
@@ -72,7 +70,7 @@ if __name__ == "__main__":
     
     # ***** planning *****
     # if the plan cache exists, load it
-    plan_cache_path = f"/home/yongjia/dgl/Yongjia/MOE_20250222/cache/{dataset_name}/path/{mod}_20250222.pkl"
+    plan_cache_path = f"./cache/{dataset_name}/path/{mod}_20250222.pkl"
     if os.path.exists(plan_cache_path):
         with open(plan_cache_path, 'rb') as f:
             plan_output_list = pkl.load(f)
@@ -89,7 +87,7 @@ if __name__ == "__main__":
             plan_output['rg'] = rg
             plan_output_list.append(plan_output)
         # save plan_output_list
-        plan_cache_path = f"/home/yongjia/dgl/Yongjia/MOE_20250222/cache/{dataset_name}/path/{mod}_20250222.pkl"
+        plan_cache_path = f"./cache/{dataset_name}/path/{mod}_20250222.pkl"
         os.makedirs(os.path.dirname(plan_cache_path), exist_ok=True)
         with open(plan_cache_path, 'wb') as f:
             pkl.dump(plan_output_list, f)
@@ -126,10 +124,10 @@ if __name__ == "__main__":
         count += 1 
         
                 
-        for metric in eval_metrics:
-            print(
-                f"{metric}: {np.mean(eval_csv[eval_csv['idx'].isin(all_indices)][metric])}"
-            )
+        # for metric in eval_metrics:
+        #     print(
+        #         f"{metric}: {np.mean(eval_csv[eval_csv['idx'].isin(all_indices)][metric])}"
+        #     )
     
     
     print(f"MOR count: {mor_path.mor_count}")

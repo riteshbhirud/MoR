@@ -2,7 +2,7 @@
 
 # Define datasets and mods
 datasets=("prime")
-mods=("test" "val")
+mods=("test" "val" "train")
 
 # Define scorer_name mapping using an associative array
 declare -A dataset_scorer_map=(

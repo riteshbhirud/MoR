@@ -17,4 +17,5 @@ for dataset in "${datasets[@]}"; do
 
     cd Reranking
     python rerank.py --dataset_name "$dataset"
+    cd ..
 done

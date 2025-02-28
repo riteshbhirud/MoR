@@ -1,6 +1,3 @@
-import sys
-
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
 from Reasoning.text_retrievers.contriever import Contriever
 from Reasoning.text_retrievers.ada import Ada
 from stark_qa import load_qa, load_skb
@@ -243,10 +240,6 @@ def get_ada_scores(dataset_name, mod, skb, path):
         pkl.dump(data, f)
 
 if __name__ == '__main__':
-    path = f"/home/yongjia/dgl/Yongjia/MOE_20250222/amazon_train_mix.pkl"
-    dataset_name = 'amazon'
-    mod = 'train'
-    skb = load_skb(dataset_name)
-    get_ada_scores(dataset_name, mod, skb, path)
+    print(f"Test prepare_rerank")
         
                 
