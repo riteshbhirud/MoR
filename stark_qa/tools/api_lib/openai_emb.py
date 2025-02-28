@@ -1,3 +1,4 @@
+from pathlib import Path
 import re
 import torch
 import openai
@@ -136,7 +137,9 @@ def get_contriever(dataset_name) -> torch.FloatTensor:
     emb_dim = 768
     
     encoder = Contriever(encoder, emb_dim=emb_dim)
-    checkpoint_path = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Reasoning/text_retrievers/model_checkpoint/contriever/{dataset_name}/best_20250204.pth"
+    current_file = Path(__file__).resolve()
+    project_root = current_file.parents[3]
+    checkpoint_path = f"{project_root}/Reasoning/text_retrievers/model_checkpoint/contriever/{dataset_name}/best_20250204.pth"
     checkpoint = torch.load(checkpoint_path)
     encoder.load_state_dict(checkpoint)
     encoder.to('cuda')
