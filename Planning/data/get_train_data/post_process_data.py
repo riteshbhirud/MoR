@@ -10,7 +10,7 @@ import os
 import copy
 
 def save_data(data, dataset_name, model_name):
-    file_dir = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Planning/data/finetune/{dataset_name}"
+    file_dir = f"../data/finetune/{dataset_name}"
     os.makedirs(file_dir, exist_ok=True)
     file_path = os.path.join(file_dir, f"llama_ft_{model_name}.jsonl")
     
@@ -46,9 +46,13 @@ if __name__ == "__main__":
     
     for dataset_name in dataset_name_list:
         for model_name in model_names:
-            with open(f"/home/yongjia/dgl/Yongjia/MOE_20250222/Planning/data/finetune/{dataset_name}/1000_{model_name}.json", "r") as f:
+            relative_path = f"finetune/{dataset_name}/1000.json" #  f"finetune/{dataset_name}/1000_{dataset_name}.json"
+            current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Directory of the current script
+            file_path = os.path.join(current_dir, relative_path)
+            with open(f"{file_path}", "r") as f:
                 sample = json.load(f)
             
             # process data
             process(sample, dataset_name, model_name)
+            print(f"Processing {model_name} for {dataset_name} is done.")
             break

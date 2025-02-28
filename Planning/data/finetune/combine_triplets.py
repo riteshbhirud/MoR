@@ -1,5 +1,8 @@
 import json
-path = "/home/yongjia/dgl/Yongjia/MOE_20250222/Planning/data/finetune/prime/1000.json"
+import os
+
+
+path = "./prime/1000.json"
 with open(path, 'r') as f:
     data = json.load(f)
     
@@ -87,4 +90,4 @@ for i in range(len(data)):
     routes = check_order(routes, target)
     routes_list.append(routes)
     restrictions_list.append(restrictions)
-    
+

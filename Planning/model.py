@@ -1,11 +1,8 @@
 import sys
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
-
-import torch
+import os
 import torch.nn as nn
 import ast
 from unsloth import FastLanguageModel
-import json
 from transformers import TextStreamer
 import contractions
 import re
@@ -16,7 +13,7 @@ class Planner(nn.Module):
     def __init__(self, dataset_name):
         super(Planner, self).__init__()
         self.dataset_name = dataset_name
-        self.checkpoint_path = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Planning/checkpoints/{dataset_name}/lora_model/"
+        self.checkpoint_path = f"Planning/checkpoints/{dataset_name}/lora_model/"
         self.max_seq_length = 2048
         self.dtype = None
         self.load_in_4bit = True

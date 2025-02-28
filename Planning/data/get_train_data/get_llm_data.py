@@ -2,18 +2,26 @@
 Desc: This file is used to get the training data from the LLM
 
 """
+import sys
+from pathlib import Path
+
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[3]
+
+# Add the project root to the system path
+sys.path.append(str(project_root))
+
+from stark_qa import load_qa
+
 import argparse
 import os
 from openai import AzureOpenAI
 import json
-import sys
-
 import openai
-
 from prompts import prompts
 
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE/')
-from stark_qa import load_qa
+
 
 
 
