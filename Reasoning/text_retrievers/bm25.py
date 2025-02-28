@@ -3,11 +3,16 @@ input: query, node_type, topk
 output: pred_dict: {node_id: score}
 
 """
-import sys
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
-
 import bm25s
 from tqdm import tqdm
+import sys
+from pathlib import Path
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[2]
+# Add the project root to the system path
+sys.path.append(str(project_root))
+
 from Reasoning.text_retrievers.stark_model import ModelForSTaRKQA
 
 target_type = {'amazon': 'product', 'prime': 'combine', 'mag': 'paper'}
@@ -99,10 +104,5 @@ class BM25(ModelForSTaRKQA):
         return pred_dict
 
 if __name__ == '__main__':
-    from stark_qa import load_qa, load_skb
-    dataset_name = 'amazon'
-    skb = load_skb(dataset_name)
-    retriever = BM25(skb, dataset_name)
-    query = 'What is the price of the product?'
-    pred_dict = retriever(query, 'combine', 5)
-    print(pred_dict)
+    print(f"Testing BM25")
+    

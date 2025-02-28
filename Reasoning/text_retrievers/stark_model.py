@@ -5,7 +5,12 @@ import torch
 import torch.nn as nn
     
 import sys
-sys.path.append(f'/home/yongjia/dgl/Yongjia/MOE_20250222/')
+from pathlib import Path
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[2]
+# Add the project root to the system path
+sys.path.append(str(project_root))
 
 from stark_qa.tools.api import get_api_embeddings, get_sentence_transformer_embeddings
 from stark_qa.tools.local_encoder import get_llm2vec_embeddings, get_gritlm_embeddings
@@ -142,3 +147,5 @@ def get_embeddings(text, model_name, **encode_kwargs):
     return emb.view(len(text), -1)
 
 
+if __name__ == '__main__':
+    print("Testing ModelForSTaRKQA...")

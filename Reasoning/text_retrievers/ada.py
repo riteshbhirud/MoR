@@ -3,16 +3,21 @@
 input: query, query_id, candidates_ids
 output: pred_dict: {node_id: similarity}
 """
-import sys
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
 
+import sys
+from pathlib import Path
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[2]
+# Add the project root to the system path
+sys.path.append(str(project_root))
 import torch
 from Reasoning.text_retrievers.stark_model import ModelForSTaRKQA
 
 class Ada(ModelForSTaRKQA):
     def __init__(self, skb, dataset_name, device):
         super(Ada, self).__init__(skb)
-        self.emb_dir = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Reasoning/data/emb/{dataset_name}/"
+        self.emb_dir = f"{project_root}/Reasoning/data/emb/{dataset_name}/"
         self.query_emb_path = self.emb_dir + "text-embedding-ada-002/query/query_emb_dict.pt"
         self.query_emb_dict = torch.load(self.query_emb_path)
         # print(f"777, {self.query_emb_path}")

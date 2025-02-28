@@ -5,17 +5,20 @@ output: pred_dict: {node_id: similarity}
 """
 import heapq
 import sys
-
+from pathlib import Path
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[2]
+# Add the project root to the system path
+sys.path.append(str(project_root))
 from stark_qa.tools.api_lib.openai_emb import get_contriever, get_contriever_embeddings
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
-
 import torch
 from Reasoning.text_retrievers.stark_model import ModelForSTaRKQA
 
 class Contriever(ModelForSTaRKQA):
     def __init__(self, skb, dataset_name, device):
         super(Contriever, self).__init__(skb)
-        self.emb_dir = f"/home/yongjia/dgl/Yongjia/MOE_20250222/Reasoning/data/emb/{dataset_name}/"
+        self.emb_dir = f"{project_root}/Reasoning/data/emb/{dataset_name}/"
 
         self.query_emb_path = self.emb_dir + "contriever/query_no_rel_no_compact/query_emb_dict.pt"
         self.query_emb_dict = torch.load(self.query_emb_path)
@@ -70,3 +73,6 @@ class Contriever(ModelForSTaRKQA):
 
 
         return pred_dict
+
+if __name__ == '__main__':
+    print("Testing Contriever")

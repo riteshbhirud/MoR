@@ -1,5 +1,10 @@
 import sys
-sys.path.append('/home/yongjia/dgl/Yongjia/MOE_20250222/')
+from pathlib import Path
+# Get the absolute path of the current script
+current_file = Path(__file__).resolve()
+project_root = current_file.parents[2]
+# Add the project root to the system path
+sys.path.append(str(project_root))
 
 from .utils import combine_dicts, parse_metapath, get_scorer, get_text_retriever, fix_length
 from models.model import ModelForSTaRKQA
@@ -423,6 +428,8 @@ class MOR4Path(ModelForSTaRKQA):
         
         
         return output
-        
+    
+if __name__ == "__main__":
+    print(f"Test mor4path")
         
 

@@ -110,3 +110,7 @@ def get_scorer(dataset_name, scorer_name, skb, **kwargs):
         return Contriever(skb, dataset_name, kwargs.get("device", 'cuda'))
     else:
         raise ValueError(f"Invalid scorer name: {scorer_name}")
+    
+
+if __name__ == "__main__":
+    print(f"Test utils")
