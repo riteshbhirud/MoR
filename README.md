@@ -1,5 +1,6 @@
 # MoR
 This repository is an official PyTorch implementation of MoR in [Mixture of Structural-and-Textual Retrieval over Text-rich Graph Knowledge Bases](https://arxiv.org/pdf/2502.20317)
+
 [![](https://img.shields.io/badge/Huggingface_Learderboard-online-yellow?style=plastic&logo=Hugging%20face)](https://huggingface.co/GagaLey/MoR)
 [![](https://img.shields.io/badge/Arxiv-paper-red?style=plastic&logo=arxiv)](https://arxiv.org/pdf/2502.20317)
 
