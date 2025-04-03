@@ -63,7 +63,7 @@ bash train_reranker.sh
 #### If you are using Azure API
 
 ```bash
-python script.py --model "model_name" \
+python get_llm_data.py --model "model_name" \
   --dataset_name "dataset_name" \
   --azure_api_key "your_azure_key" \
   --azure_endpoint "your_azure_endpoint" \
@@ -74,7 +74,7 @@ python script.py --model "model_name" \
 #### If you are using OpenAI API
 
 ```bash
-python script.py --model "model_name" \
+python get_llm_data.py --model "model_name" \
   --dataset_name "dataset_name" \
   --openai_api_key "your_openai_key" \
   --openai_endpoint "your_openai_endpoint"
