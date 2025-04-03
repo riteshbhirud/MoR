@@ -86,7 +86,7 @@ def save_json(data, dataset_name):
             dataset_name: the name of the dataset
     """
     
-    file_dir = f"/home/yongjia/dgl/Yongjia/MOE/Reasoner/data/finetune/{dataset_name}"
+    file_dir = f"../MoR/Planning/data/finetune/{dataset_name}"
     os.makedirs(file_dir, exist_ok=True)
     file_path = f"{file_dir}/1000_{parameters['azure']['model']}.json"
     
