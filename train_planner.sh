@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to the Planning directory
-cd Planning
+cd Planning/data
 
 # Run the training script
 python train_eval.py
