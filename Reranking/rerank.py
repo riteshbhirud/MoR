@@ -293,7 +293,7 @@ def parse_args():
     parser.add_argument("--dataset_name", type=str, default="mag", help="Name of the dataset.")
     
     # Add arguments for model configurations
-    parser.add_argument("--device", type=str, default="cuda", help="Device to run the model (e.g., 'cuda' or 'cpu').")
+    parser.add_argument("--device", type=str, default="cpu", help="Device to run the model (e.g., 'cuda' or 'cpu').")
 
     
     # add concat_num
