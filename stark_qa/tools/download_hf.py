@@ -43,22 +43,32 @@ def download_hf_folder(repo, folder, repo_type="dataset", save_as_folder=None):
         save_as_folder (str, optional): The local directory to save the downloaded folder. 
                                         Defaults to "data/".
     """
-    # List all files in the repository
-    files = list_repo_files(repo, repo_type=repo_type)
+    from huggingface_hub import snapshot_download
+    import os
     
-    # Filter files that belong to the specified folder
-    folder_files = [f for f in files if f.startswith(folder + '/')]
+    # Download the entire repo to cache (or use existing cache)
+    cache_dir = snapshot_download(repo, repo_type=repo_type, allow_patterns=f"{folder}/*")
     
-    # Download and save each file in the folder
-    for file in folder_files:
-        file_path = hf_hub_download(repo, file, repo_type=repo_type)
-        if save_as_folder is not None:  
-            new_file_path = os.path.join(save_as_folder, os.path.relpath(file, folder))
-            os.makedirs(os.path.dirname(new_file_path), exist_ok=True)
-            if not os.path.exists(new_file_path) and file_path != new_file_path:
-                shutil.copy2(file_path, new_file_path)
-        else:
-            # get the upper dir absolute dir name of the file
-            save_as_folder = os.path.dirname(os.path.dirname(file_path))
-    print(f"Use file from {file_path}.")
-    return save_as_folder
+    # The folder we want is inside the cache
+    result_folder = os.path.join(cache_dir, folder)
+    
+    if save_as_folder is not None:
+        # Copy from cache to specified folder
+        import shutil
+        os.makedirs(save_as_folder, exist_ok=True)
+        if os.path.exists(result_folder):
+            for item in os.listdir(result_folder):
+                src = os.path.join(result_folder, item)
+                dst = os.path.join(save_as_folder, item)
+                if os.path.isdir(src):
+                    shutil.copytree(src, dst, dirs_exist_ok=True)
+                else:
+                    shutil.copy2(src, dst)
+            result_folder = save_as_folder
+    
+    if os.path.exists(result_folder):
+        print(f"Using folder at {result_folder}")
+        return result_folder
+    else:
+        print(f"WARNING: Folder not found: {result_folder}")
+        return None
