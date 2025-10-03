@@ -66,24 +66,38 @@ def seed_everything(seed=0):
     torch.backends.cudnn.benchmark = False
     
 
-def move_to_cuda(sample):
+def get_device():
+    """Get the best available device"""
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    else:
+        return torch.device("cpu")
+
+def move_to_device(sample, device=None):
+    """Move tensors to specified device (CPU or CUDA)"""
+    if device is None:
+        device = get_device()
+    
     if len(sample) == 0:
         return {}
 
-    def _move_to_cuda(maybe_tensor):
+    def _move_to_device(maybe_tensor):
         if torch.is_tensor(maybe_tensor):
-            return maybe_tensor.cuda()
+            return maybe_tensor.to(device)
         elif isinstance(maybe_tensor, dict):
             return {
-                key: _move_to_cuda(value)
+                key: _move_to_device(value)
                 for key, value in maybe_tensor.items()
             }
-        # elif isinstance(maybe_tensor, list):
-        #     return [_move_to_cuda(x) for x in maybe_tensor]
         else:
             return maybe_tensor
 
-    return _move_to_cuda(sample)
+    return _move_to_device(sample)
+
+# Keep old function name for backward compatibility
+def move_to_cuda(sample):
+    """Deprecated: use move_to_device instead"""
+    return move_to_device(sample, device='cpu')  # Force CPU
 
 
 if __name__ == "__main__":
