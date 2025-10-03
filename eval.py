@@ -3,7 +3,12 @@ import sys
 
 
 from Reasoning.mor4path import MOR4Path
-from Planning.model import Planner
+try:
+    from Planning.model import Planner
+    PLANNER_AVAILABLE = True
+except ImportError:
+    PLANNER_AVAILABLE = False
+    Planner = None
 from prepare_rerank import prepare_trajectories
 from tqdm import tqdm
 import os
@@ -58,7 +63,12 @@ if __name__ == "__main__":
     ]
     
     mor_path = MOR4Path(dataset_name, text_retriever_name, scorer_name, skb)
-    reasoner = Planner(dataset_name)
+    if PLANNER_AVAILABLE:
+        reasoner = Planner(dataset_name)
+    else:
+        reasoner = None
+        print("Using cached plans (Planner not available)")
+
     outputs = []
     topk = 100
     split_idx = qa.get_idx_split(test_ratio=1.0)
@@ -72,9 +82,14 @@ if __name__ == "__main__":
     # if the plan cache exists, load it
     plan_cache_path = f"./cache/{dataset_name}/path/{mod}_20250222.pkl"
     if os.path.exists(plan_cache_path):
+        print(f"Loading cached plans from {plan_cache_path}")
         with open(plan_cache_path, 'rb') as f:
             plan_output_list = pkl.load(f)
     else:
+        if reasoner is None:
+            raise RuntimeError(f"Planner not available and no cached plans found at {plan_cache_path}. Cannot proceed.")
+        
+        print("Generating plans (no cache found)...")
         plan_output_list = []
         for idx, i in enumerate(tqdm(all_indices)):
             plan_output = {}
@@ -87,13 +102,14 @@ if __name__ == "__main__":
             plan_output['rg'] = rg
             plan_output_list.append(plan_output)
         # save plan_output_list
-        plan_cache_path = f"./cache/{dataset_name}/path/{mod}_20250222.pkl"
         os.makedirs(os.path.dirname(plan_cache_path), exist_ok=True)
         with open(plan_cache_path, 'wb') as f:
             pkl.dump(plan_output_list, f)
+        print(f"Saved plans to {plan_cache_path}")
     
     
     # ***** Reasoning *****
+    print("Starting reasoning stage...")
     for idx, i in enumerate(tqdm(all_indices)):
         
         query = plan_output_list[idx]['query']
@@ -134,10 +150,10 @@ if __name__ == "__main__":
     
 
     # prepare trajectories and save
+    print("Preparing trajectories for reranking...")
     bm25 = mor_path.text_retriever
     test_data = prepare_trajectories(dataset_name, bm25, skb, outputs)
     save_path = f"{dataset_name}_{mod}.pkl"
     with open(save_path, 'wb') as f:
         pkl.dump(test_data, f)
-    
-    
+    print(f"Saved results to {save_path}")
